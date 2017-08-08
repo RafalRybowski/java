@@ -52,6 +52,33 @@ public class RLE {
         fileg.close();
         files.close();
     }
+    
+    public static void decompresion() throws IOException {
+        fileg = new FileReader(pathg);
+        files = new FileWriter(paths);
+        int a;
+        int l = 1;
+        int tmp = 0;
+        while ((a = fileg.read()) != -1) {
+            if ((char) a >= '0' && (char) a <= '9') {
+                tmp *= l;
+                tmp += Character.getNumericValue(a);
+                l *= 10;
+            } else {
+                if (tmp == 0) {
+                    files.write(a);
+                } else {
+                    for (int i = 0; i < tmp; i++)
+                        files.write(a);
+                    tmp = 0;
+                    l = 1;
+                }
+            }
+
+        }
+        fileg.close();
+        files.close();
+    }
 
     public static void main(String[] args) throws IOException {
         System.out.println("give path file to compres");
