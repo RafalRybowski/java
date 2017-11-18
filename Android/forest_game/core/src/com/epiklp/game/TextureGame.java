@@ -27,7 +27,7 @@ public class TextureGame implements Interface {
             LayerImage[i].setHeight(height*2);
             stage.addActor(LayerImage[i]);
         }
-        stage.getCamera().position.y = height/2+64g
+        stage.getCamera().position.y = height/2+64;
     }
 
     public void draw()
