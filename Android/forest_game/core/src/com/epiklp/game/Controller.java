@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 public class Controller implements Interface {
     private Stage stage;
     private boolean upPressed, downPressed, leftPressed, rightPressed;
+    private Table tabr;
 
     public Controller()
     {
@@ -60,7 +61,7 @@ public class Controller implements Interface {
         tabl.add(iml).size(iml.getWidth(), iml.getHeight());
         stage.addActor(tabl);
 
-        Table tabr = new Table();
+        tabr = new Table();
         tabr.setPosition(width-(width/10)/2, (width/10));
         Image imr = new Image(new Texture("button/R.png"));
         imr.setSize(width/10,width/10);
@@ -80,6 +81,19 @@ public class Controller implements Interface {
 
         Image ime = new Image(new Texture("button/D.png"));
         ime.setSize(width/10,width/10);
+        ime.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                downPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                downPressed = false;
+            }
+        });
         tabr.add(ime).size(iml.getWidth(), iml.getHeight());
         tabr.row().padBottom(10);
         tabr.add(imr).size(iml.getWidth(), iml.getHeight());
@@ -106,5 +120,10 @@ public class Controller implements Interface {
 
     public boolean isRightPressed() {
         return rightPressed;
+    }
+
+    public void dispose()
+    {
+        stage.dispose();
     }
 }
